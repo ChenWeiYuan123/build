@@ -1,0 +1,7 @@
+# src/db environment env variables
+.env
+.DS_Store
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
