@@ -64,6 +64,8 @@ module.exports = {
         alias: {
             vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
             'vue-router$': path.resolve(__dirname, 'node_modules/vue-router/dist/vue-router.esm.js'),
+            mixins: path.resolve(__dirname, 'src/mixins'),
+            page: path.resolve(__dirname, 'src/page'),
         },
     },
     devtool: 'source-map'

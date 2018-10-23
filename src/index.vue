@@ -1,14 +1,18 @@
 <template>
     <div>
+        <div class="nav">
+            <router-link to="/account">Index</router-link>
+            <router-link to="/set">Set Account</router-link>
+        </div>
         <router-view></router-view>
     </div>
 </template>
 <script>
 export default {
-    created() {
-        window.$bank = JSON.parse(localStorage.getItem('bank'));
-    },
 }
 </script>
-<style module>
+<style>
+.nav {
+    padding: 20px 0px;
+}
 </style>
