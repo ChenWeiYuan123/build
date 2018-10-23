@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="nav">
-            <router-link to="/account">Index</router-link>
-            <router-link to="/set">Set Account</router-link>
+            <router-link to="/account?type=person">Person</router-link>
+            <router-link to="/account?type=company">Company</router-link>
+            <router-link to="/storage">storage</router-link>
         </div>
         <router-view></router-view>
     </div>

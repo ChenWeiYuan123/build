@@ -9,7 +9,7 @@
 export default {
     data(){
         return {
-            json: '',
+            json: localStorage.getItem('bank'),
         }
     },
     methods: {

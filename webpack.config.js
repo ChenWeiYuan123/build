@@ -8,7 +8,7 @@ module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
     output: {
         path: path.resolve(__dirname, 'public'),
-        publicPath: '/public/', 
+        publicPath: '/public/',
     },
     module: {
         rules: [
@@ -57,6 +57,7 @@ module.exports = {
     ],
     devServer: {
         // hot: true,
+        port: 6688,
         publicPath: '/public/',
         contentBase: path.resolve(__dirname, 'public'),
     },

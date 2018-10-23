@@ -1,5 +1,5 @@
 import Index from './index.vue';
 export default {
-    path: 'set',
+    path: 'storage',
     component: Index,
 }

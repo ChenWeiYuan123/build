@@ -13,6 +13,7 @@
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.money}}</td>
+                    <td>{{item.desc}}</td>
                     <td>
                         <template v-if="item.transfer">
                             <ul>
@@ -22,8 +23,8 @@
                         </template>
                     </td>
                     <td>
-                        <router-link :to="{path: 'modify', query: {name: item.name}}">Modify</router-link>
-                        <router-link :to="{path: 'transfer', query: {name: item.name}}">Transfer</router-link>
+                        <router-link :to="{path: 'modify', query: {name: item.name, type}}">Modify</router-link>
+                        <router-link :to="{path: 'transfer', query: {name: item.name, type}}">Transfer</router-link>
                         <a @click="deleteItem(item)">Delete</a>
                     </td>
                 </tr>
@@ -41,6 +42,7 @@ export default {
                 'id',
                 'name',
                 'money',
+                'desc',
                 'transfer',
                 'operator'
             ],
@@ -48,7 +50,7 @@ export default {
     },
     methods: {
         toAdd() {
-            this.$router.push({path: '/account/add'});
+            this.$router.push({path: '/account/add', query: {type: this.type}});
         },
         deleteItem(item) {
             this.deleteMember(item);
@@ -63,7 +65,7 @@ export default {
 </script>
 <style>
 .operator{
-    padding: 20px 0px;   
+    padding: 20px 0px;
 }
 .table{
     border: solid 1px #eee;
