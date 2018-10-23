@@ -2,13 +2,41 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
+    mode: 'development',
     entry: ['babel-polyfill', './src/index.js'],
     output: {
         path: path.resolve(__dirname, 'public'),
         publicPath: '/public/', 
     },
+    module: {
+        rules: [
+            {
+                test:/\.css$/,
+                use:[
+                    // 'style-loader',
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        // options: {
+                            // 开启 CSS Modules
+                            // modules: true,
+                            // 自定义生成的类名
+                            // localIdentName: '[local]_[hash:base64:8]'
+                        // }
+                    }
+                ],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
+            }
+        ]
+    },
     plugins: [
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             hash: true,
@@ -32,5 +60,11 @@ module.exports = {
         publicPath: '/public/',
         contentBase: path.resolve(__dirname, 'public'),
     },
-    // devtool: 'source-map'
+    resolve: {
+        alias: {
+            vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
+            'vue-router$': path.resolve(__dirname, 'node_modules/vue-router/dist/vue-router.esm.js'),
+        },
+    },
+    devtool: 'source-map'
 }

@@ -1,14 +1,11 @@
 import Vue from 'vue';
+// import 'lodash';
 import VueRouter from 'vue-router';
-import 'lodash';
+Vue.use(VueRouter);
+import routes from './route.js';
 new Vue({
-    el: '#app',
-    data() {
-        return {
-            str: 'test123',
-        }
-    },
-    render(h) {
-        return h('h1', this.str);
-    },
-})
+    // el: '#app',
+    router: new VueRouter({
+        routes,
+    }),
+}).$mount('#app');
