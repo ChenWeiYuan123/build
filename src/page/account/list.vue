@@ -10,6 +10,7 @@
             </thead>
             <tbody>
                 <tr v-for="item in account" :key="item">
+                    <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.money}}</td>
                     <td>
@@ -20,7 +21,11 @@
                             <router-link v-if="item.transfer.length > 5" to="/">More</router-link>
                         </template>
                     </td>
-                    <td><router-link :to="{path: 'modify', query: {name: item.name}}">Modify</router-link></td>
+                    <td>
+                        <router-link :to="{path: 'modify', query: {name: item.name}}">Modify</router-link>
+                        <router-link :to="{path: 'transfer', query: {name: item.name}}">Transfer</router-link>
+                        <a @click="deleteItem(item)">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -33,6 +38,7 @@ export default {
     data() {
         return {
             headers: [
+                'id',
                 'name',
                 'money',
                 'transfer',
@@ -44,8 +50,11 @@ export default {
         toAdd() {
             this.$router.push({path: '/account/add'});
         },
+        deleteItem(item) {
+            this.deleteMember(item);
+        },
         showTransfer(list) {
-            let str = list.map(item => `${item.money} -> ${item.to}(${item.desc}/${item.date})`);
+            let str = list.map(item => `${item.money} -> ${item.member}(${item.desc}/${item.date})`);
             str = str.slice(0, 5);
             return str;
         }

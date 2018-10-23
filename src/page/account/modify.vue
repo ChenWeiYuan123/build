@@ -2,6 +2,7 @@
     <div>
         <button @click="back">back</button>
         <form>
+            <div><label>id: </label><input type="text" disabled v-model="form.id" /></div>
             <div><label>name: </label><input type="text" disabled v-model="form.name" /></div>
             <div><label>money: </label><input type="text" v-model="form.money" /></div>
             <div><label>desc: </label><input type="text" v-model="form.desc" /></div>

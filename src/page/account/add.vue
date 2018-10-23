@@ -31,6 +31,7 @@ export default {
             if(this.members.includes(this.form.name)) {
                 window.alert('repeat name!')
             } else {
+                this.form.id = this.members.length + 1;
                 this.add(this.form);
             }
         },

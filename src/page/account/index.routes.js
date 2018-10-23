@@ -1,6 +1,7 @@
 import List from './list.vue';
 import Add from './add.vue';
 import Modify from './modify.vue';
+import Transfer from './transfer.vue';
 const wrapper = { template: '<div><router-view></router-view></div>' };
 export default {
     path: '/account',
@@ -18,6 +19,10 @@ export default {
         {
             path: 'modify',
             component: Modify,
+        },
+        {
+            path: 'transfer',
+            component: Transfer,
         },
     ]
 }

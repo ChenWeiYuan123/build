@@ -1,4 +1,4 @@
-const LocalAccount = JSON.parse(localStorage.getItem('bank'));
+const LocalAccount = JSON.parse(localStorage.getItem('bank')) || {account: []};
 export default {
     data() {
         return {
@@ -16,9 +16,15 @@ export default {
             this.save();
         },
         modify(data) {
-            let modifyAccount = this.account.filter(item => item.name === this.name)[0];
+            let modifyAccount = this.account.filter(item => item.name === data.name)[0];
             Object.assign(modifyAccount, data);
             this.save();
         },
+        deleteMember(data) {
+            let deleteAccount = this.account.filter(item => item.name === data.name)[0];
+            const index = this.account.indexOf(deleteAccount);
+            this.account.splice(index, 1);
+            this.save();
+        }
     }
 }
