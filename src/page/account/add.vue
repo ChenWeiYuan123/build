@@ -1,6 +1,5 @@
 <template>
     <div>
-        <button @click="back">back</button>
         <form>
             <div><label>name: </label><input type="text" v-model="form.name" /></div>
             <div><label>money: </label><input type="text" v-model="form.money" /></div>
@@ -24,9 +23,6 @@ export default {
         }
     },
     methods: {
-        back() {
-            this.$router.push({path: '/account'});
-        },
         submit() {
             if(this.members.includes(this.form.name)) {
                 window.alert('repeat name!')

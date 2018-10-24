@@ -1,6 +1,5 @@
 <template>
     <div>
-        <button @click="back">back</button>
         <form>
             <div><label>id: </label><input type="text" disabled v-model="form.id" /></div>
             <div><label>name: </label><input type="text" disabled v-model="form.name" /></div>
@@ -24,9 +23,6 @@ export default {
         this.form = JSON.parse(JSON.stringify(this.account.filter(item => item.name === this.name)[0]));
     },
     methods: {
-        back() {
-            this.$router.push({path: '/account'});
-        },
         submit() {
             this.modify(this.form);
         },
