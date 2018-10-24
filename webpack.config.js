@@ -7,8 +7,8 @@ module.exports = {
     mode: 'development',
     entry: ['babel-polyfill', './src/index.js'],
     output: {
-        path: path.resolve(__dirname, 'public'),
-        publicPath: '/public/',
+        path: path.resolve(__dirname, 'public'), // build 时打包文件存放位置
+        publicPath: '/public/', // build 时url重写路径
     },
     module: {
         rules: [
@@ -57,9 +57,11 @@ module.exports = {
     ],
     devServer: {
         // hot: true,
+        // inline: false,
         port: 6688,
-        publicPath: '/public/',
-        contentBase: path.resolve(__dirname, 'public'),
+        publicPath: '/public/', // devserver 的打包存放目录,类似于output的path
+        // contentBase: path.resolve(__dirname, 'public'),
+        contentBase: false, // 本地伺服目录
     },
     resolve: {
         alias: {
@@ -68,7 +70,7 @@ module.exports = {
             mixins: path.resolve(__dirname, 'src/mixins'),
             page: path.resolve(__dirname, 'src/page'),
         },
-        extensions: ['js', 'vue'],
+        extensions: ['.js', '.vue'],
     },
     devtool: 'source-map'
 }
