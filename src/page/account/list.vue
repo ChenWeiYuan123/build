@@ -58,7 +58,9 @@ export default {
             this.deleteMember(item);
         },
         showTransfer(list) {
-            let str = list.map(item => `${item.money} -> ${item.member}(${item.desc}/${item.date})`);
+            const reverseList = _.cloneDeep(list);
+            reverseList.reverse();
+            let str = reverseList.map(item => `${item.money} -> ${item.member}(${item.desc}/${item.date})`);
             str = str.slice(0, 5);
             return str;
         }

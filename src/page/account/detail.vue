@@ -40,7 +40,9 @@ export default {
     },
     created() {
         this.member = JSON.parse(JSON.stringify(this.account.filter(item => item.name === this.name)[0]));
-        this.data = this.member.transfer;
+        const reverseList = _.cloneDeep(this.member.transfer);
+        reverseList.reverse();
+        this.data = reverseList;
     },
 }
 </script>

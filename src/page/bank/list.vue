@@ -34,7 +34,9 @@ export default {
         }
     },
     created() {
-        this.data = this.bankAccount.bank.transfer;
+        const reverseList = _.cloneDeep(this.bankAccount.bank.transfer);
+        reverseList.reverse();
+        this.data = reverseList;
     },
 }
 </script>
