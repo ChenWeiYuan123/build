@@ -68,6 +68,7 @@ module.exports = {
             mixins: path.resolve(__dirname, 'src/mixins'),
             page: path.resolve(__dirname, 'src/page'),
         },
+        extensions: ['js', 'vue'],
     },
     devtool: 'source-map'
 }
