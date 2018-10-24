@@ -9,7 +9,6 @@ export default [
     {
         path: '/',
         component: Index,
-        // redirect: 'account',
         children: [
             ...cache,
         ]

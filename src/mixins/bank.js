@@ -1,7 +1,8 @@
 const LocalBank = JSON.parse(localStorage.getItem('bank')) || {account: { person: [], company: [] }};
-const type = 'person';
+
 export default {
     data() {
+        const type = this.$route.query.type || 'person';
         return {
             type,
             bank: LocalBank,
@@ -22,7 +23,6 @@ export default {
         },
     },
     created() {
-        this.type = this.$route.query.type;
         this.account = this.bankAccount[this.type];
         this.members = this.bankAccount[this.type].map(item => item.name);
     },
