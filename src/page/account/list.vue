@@ -19,7 +19,7 @@
                             <ul>
                                 <li v-for="log in showTransfer(item.transfer)">{{log}}</li>
                             </ul>
-                            <router-link v-if="item.transfer.length > 5" to="/">More</router-link>
+                            <router-link v-if="item.transfer.length > 5" :to="{path: 'detail', query: {name: item.name, type}}">More</router-link>
                         </template>
                     </td>
                     <td>

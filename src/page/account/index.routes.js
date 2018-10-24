@@ -4,6 +4,7 @@ import Modify from './modify.vue';
 import Transfer from './transfer.vue';
 import Deposit from './deposit.vue';
 import Withdraw from './withdraw.vue';
+import detail from './detail.vue';
 const wrapper = { template: '<div><router-view></router-view></div>' };
 export default {
     path: '/account',
@@ -13,6 +14,10 @@ export default {
         {
             path: 'list',
             component: List,
+        },
+        {
+            path: 'detail',
+            component: detail,
         },
         {
             path: 'add',

@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="operator">
-            money: {{bankAccount.bank.money}}
+            id: {{member.id}}
+            name: {{member.name}}
+            money: {{member.money}}
+            desc: {{member.desc}}
         </div>
         <table border>
             <thead>
@@ -31,10 +34,13 @@ export default {
                 'date',
             ],
             data: [],
+            member: {},
+            name: this.$route.query.name,
         }
     },
     created() {
-        this.data = this.bankAccount.bank.transfer;
+        this.member = JSON.parse(JSON.stringify(this.account.filter(item => item.name === this.name)[0]));
+        this.data = this.member.transfer;
     },
 }
 </script>
