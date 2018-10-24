@@ -8,11 +8,12 @@
                 <th v-for="item in headers" :key="item">{{item}}</th>
             </thead>
             <tbody>
-                <tr v-for="item in data" :key="item">
+                <tr v-for="(item, index) in data" :key="item">
                     <td>{{item.money}}</td>
                     <td>{{item.member}}</td>
                     <td>{{item.desc}}</td>
                     <td>{{item.date}}</td>
+                    <td><a @click="deleteItem(item, index)">Delete</a></td>
                 </tr>
             </tbody>
         </table>
@@ -37,6 +38,15 @@ export default {
         const reverseList = _.cloneDeep(this.bankAccount.bank.transfer);
         reverseList.reverse();
         this.data = reverseList;
+    },
+    methods: {
+        deleteItem(item, index) {
+            this.data.splice(index, 1);
+            const list  = _.cloneDeep(this.data);
+            list.reverse();
+            this.bankAccount.bank.transfer = list;
+            this.save();
+        }
     },
 }
 </script>
