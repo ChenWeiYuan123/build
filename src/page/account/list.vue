@@ -19,14 +19,14 @@
                             <ul>
                                 <li v-for="log in showTransfer(item.transfer)">{{log}}</li>
                             </ul>
-                            <router-link v-if="item.transfer.length > 5" :to="{path: 'detail', query: {name: item.name, type}}">More</router-link>
+                            <router-link v-if="item.transfer.length > 5" :to="{path: 'detail', query: {name: item.name, id: item.id, type}}">More</router-link>
                         </template>
                     </td>
                     <td>
-                        <router-link :to="{path: 'modify', query: {name: item.name, type}}">Modify</router-link>
-                        <router-link :to="{path: 'transfer', query: {name: item.name, type}}">Transfer</router-link>
-                        <router-link :to="{path: 'deposit', query: {name: item.name, type}}">Deposit</router-link>
-                        <router-link :to="{path: 'withdraw', query: {name: item.name, type}}">Withdraw</router-link>
+                        <router-link :to="{path: 'modify', query: {name: item.name,id: item.id, type}}">Modify</router-link>
+                        <router-link :to="{path: 'transfer', query: {name: item.name,id: item.id, type}}">Transfer</router-link>
+                        <router-link :to="{path: 'deposit', query: {name: item.name,id: item.id, type}}">Deposit</router-link>
+                        <router-link :to="{path: 'withdraw', query: {name: item.name,id: item.id, type}}">Withdraw</router-link>
                         <a @click="deleteItem(item)">Delete</a>
                     </td>
                 </tr>

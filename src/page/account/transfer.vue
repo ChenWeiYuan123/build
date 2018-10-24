@@ -54,8 +54,8 @@ export default {
     },
     methods: {
         submit() {
-            const money = parseInt(this.form.money);
-            if(parseInt(this.fromMember.money) < money) {
+            const money = Number(this.form.money);
+            if(Number(this.fromMember.money) < money) {
                 window.alert('not enought money!')
             } else {
                 this.toMember = JSON.parse(JSON.stringify(this.bankAccount[this.transferType].filter(item => item.name === this.form.member)[0]));
@@ -65,9 +65,9 @@ export default {
                 const toTransfer = JSON.parse(JSON.stringify(this.form));
                 fromTransfer.money = '-' + this.form.money;
                 toTransfer.member = this.fromMember.name;
-                this.toMember.money = parseInt(this.toMember.money) + money;
+                this.toMember.money = Number(this.toMember.money) + money;
                 this.toMember.transfer ? this.toMember.transfer.push(toTransfer) : [toTransfer];
-                this.fromMember.money = parseInt(this.fromMember.money) - money;
+                this.fromMember.money = Number(this.fromMember.money) - money;
                 this.fromMember.transfer ? this.fromMember.transfer.push(fromTransfer) : [fromTransfer];
                 this.modify(this.fromMember);
                 this.modify(this.toMember, this.transferType);

@@ -38,19 +38,19 @@ export default {
         },
         modify(data, type) {
             const account = type ? this.bankAccount[type] : this.account;
-            let modifyAccount = account.filter(item => item.name === data.name)[0];
+            let modifyAccount = account.filter(item => item.id === data.id)[0];
             Object.assign(modifyAccount, data);
             this.save();
         },
         deleteMember(data, type) {
             const account = type ? this.bankAccount[type] : this.account;
-            let deleteAccount = account.filter(item => item.name === data.name)[0];
+            let deleteAccount = account.filter(item => item.id === data.id)[0];
             const index = account.indexOf(deleteAccount);
             account.splice(index, 1);
             this.save();
         },
         addMoney(member, money) {
-            member.money = parseInt(member.money) + parseInt(money);
+            member.money = Number(member.money) + Number(money);
         },
         addTransfer(member, transfer) {
             (member.transfer && member.transfer.length) ? member.transfer.push(transfer) : (member.transfer = [transfer]);

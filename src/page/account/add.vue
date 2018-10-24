@@ -16,7 +16,7 @@ export default {
         return {
             form: {
                 name: '',
-                money: '',
+                money: 0,
                 desc: '',
                 transfer: [],
             }
