@@ -2,6 +2,7 @@
     <div>
         <div class="nav">
             <router-link to="/overview">Overview</router-link>
+            <router-link to="/bank">Bank</router-link>
             <router-link to="/account?type=person">Person</router-link>
             <router-link to="/account?type=company">Company</router-link>
             <router-link to="/storage">storage</router-link>
