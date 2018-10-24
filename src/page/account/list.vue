@@ -25,6 +25,8 @@
                     <td>
                         <router-link :to="{path: 'modify', query: {name: item.name, type}}">Modify</router-link>
                         <router-link :to="{path: 'transfer', query: {name: item.name, type}}">Transfer</router-link>
+                        <router-link :to="{path: 'deposit', query: {name: item.name, type}}">Deposit</router-link>
+                        <router-link :to="{path: 'withdraw', query: {name: item.name, type}}">Withdraw</router-link>
                         <a @click="deleteItem(item)">Delete</a>
                     </td>
                 </tr>

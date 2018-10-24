@@ -48,6 +48,15 @@ export default {
             const index = account.indexOf(deleteAccount);
             account.splice(index, 1);
             this.save();
+        },
+        addMoney(member, money) {
+            member.money = parseInt(member.money) + parseInt(money);
+        },
+        addTransfer(member, transfer) {
+            (member.transfer && member.transfer.length) ? member.transfer.push(transfer) : (member.transfer = [transfer]);
+        },
+        getDate(){
+            return (new Date()).toLocaleString();
         }
     }
 }
