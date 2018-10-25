@@ -9,7 +9,7 @@
 export default {
     data(){
         return {
-            json: localStorage.getItem('bank'),
+            json: JSON.stringify(JSON.parse(localStorage.getItem('bank')),2,2),
         }
     },
     methods: {
@@ -22,7 +22,7 @@ export default {
 </script>
 <style>
 .textarea{
-    width: 600px;
-    height: 200px;
+    width: 1000px;
+    height: 500px;
 }
 </style>
