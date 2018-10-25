@@ -1,1 +1,7 @@
-{"account":{"person":[],"company":[],"bank":{"money":0,"transfer":[]}}}
+{
+  "account": {
+    "person": [],
+    "company": [],
+    "bank": { "money": 0, "transfer": [] }
+  }
+}
