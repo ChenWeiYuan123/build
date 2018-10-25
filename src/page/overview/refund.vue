@@ -4,10 +4,10 @@
             Refund
             <div>
                 <label>Type: </label>
-                <input type="radio" id="person" value="person" v-model="loanType" />
-                <label for="person">person:</label>
-                <input type="radio" id="company" value="company" v-model="loanType" />
-                <label for="company">company</label>
+                <input type="radio" id="person1" value="person" v-model="loanType" />
+                <label for="person1">person:</label>
+                <input type="radio" id="company1" value="company" v-model="loanType" />
+                <label for="company1">company</label>
             </div>
             <div>
                 <label>Member: </label>

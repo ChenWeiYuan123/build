@@ -1,0 +1,31 @@
+table {
+    border-collapse: collapse;
+}
+tr {
+    border: solid 1px #ddd;
+}
+thead {
+    border: solid 1px #ddd;
+}
+td, th {
+    border: none;
+    padding: 0px 10px;
+}
+ul { 
+    list-style-type:none;
+}
+input {
+    margin: 5px;
+    padding: 5px;
+}
+button {
+    padding: 10px 20px;
+    background: white;
+    border: solid 1px  slategray;
+}
+button:hover{
+    background: skyblue;
+}
+a {
+    padding: 5px 10px;
+}
