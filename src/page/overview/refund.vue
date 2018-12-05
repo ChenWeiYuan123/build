@@ -54,7 +54,7 @@ export default {
                 desc: '==Refund==',
             };
             this.addTransfer(this.member, transfer);
-            this.modify(this.member);
+            this.modify(this.member, this.loanType);
             if(!this.bankAccount.bank){
                 this.bankAccount.bank = {
                     money: 0,

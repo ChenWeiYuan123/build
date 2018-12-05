@@ -1,149 +1,207 @@
 {
-  "account": {
-    "person": [
-      {
-        "name": "James Gordon",
-        "money": 468,
-        "desc": "shield 1",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:26:32",
-            "member": "==Cash==",
-            "money": "468.5",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 1
-      },
-      {
-        "name": "Xavier",
-        "money": 80,
-        "desc": "xeon 1",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:27:28",
-            "member": "==Cash==",
-            "money": "80",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 2
-      },
-      {
-        "name": "Robin",
-        "money": 305,
-        "desc": "super hero 1",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:31:39",
-            "member": "==Cash==",
-            "money": "305",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 3
-      },
-      {
-        "name": "Bruce Wayne",
-        "money": 169,
-        "desc": "Trafigura",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:32:34",
-            "member": "==Cash==",
-            "money": "169",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 4
-      },
-      {
-        "name": "Mandarin",
-        "money": "167",
-        "desc": "Century 1",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:33:21",
-            "member": "==Cash==",
-            "money": "167",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 5
-      },
-      {
-        "name": "Percival Graves",
-        "money": 40,
-        "desc": "Auror 1",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:36:27",
-            "member": "==Cash==",
-            "money": "40",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 6
+    "account": {
+      "person": [
+        {
+          "name": "James Gordon",
+          "money": 468,
+          "desc": "shield 1",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:26:32",
+              "member": "==Cash==",
+              "money": "468.5",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 1
+        },
+        {
+          "name": "Xavier",
+          "money": 80,
+          "desc": "xeon 1",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:27:28",
+              "member": "==Cash==",
+              "money": "80",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 2
+        },
+        {
+          "name": "Robin",
+          "money": 305,
+          "desc": "super hero 1",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:31:39",
+              "member": "==Cash==",
+              "money": "305",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 3
+        },
+        {
+          "name": "Bruce Wayne",
+          "money": 169,
+          "desc": "Trafigura",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:32:34",
+              "member": "==Cash==",
+              "money": "169",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 4
+        },
+        {
+          "name": "Mandarin",
+          "money": "167",
+          "desc": "Century 1",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:33:21",
+              "member": "==Cash==",
+              "money": "167",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 5
+        },
+        {
+          "name": "Percival Graves",
+          "money": 40,
+          "desc": "Auror 1",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:36:27",
+              "member": "==Cash==",
+              "money": "40",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 6
+        }
+      ],
+      "company": [
+        {
+          "name": "Trafigura",
+          "money": 1353,
+          "desc": "Trade",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:10:11",
+              "member": "==Cash==",
+              "money": "1353",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 1
+        },
+        {
+          "name": "Century",
+          "money": 256,
+          "desc": "Estate",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:10:28",
+              "member": "==Cash==",
+              "money": "256",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 2
+        },
+        {
+          "name": "GoldMan Sachs",
+          "money": 188,
+          "desc": "Financial",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:11:39",
+              "member": "==Cash==",
+              "money": "199",
+              "desc": "==Deposit=="
+            },
+            {
+              "date": "2018/10/26 上午1:31:54",
+              "member": "==Cash==",
+              "money": "-11",
+              "desc": "==Withdraw=="
+            }
+          ],
+          "id": 3
+        },
+        {
+          "name": "Xeon",
+          "money": 72,
+          "desc": "Manufacture",
+          "transfer": [
+            {
+              "date": "2018/10/25 上午3:30:54",
+              "member": "==Cash==",
+              "money": "72",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 4
+        },
+        {
+          "name": "Morgan",
+          "money": 199,
+          "desc": "holding",
+          "transfer": [
+            {
+              "date": "2018/10/26 上午1:31:39",
+              "member": "==Cash==",
+              "money": "199",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 5
+        },
+        {
+          "name": "Super Hero",
+          "money": 32,
+          "desc": "Machine",
+          "transfer": [
+            {
+              "date": "2018/10/26 上午1:32:59",
+              "member": "==Cash==",
+              "money": "32",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 6
+        },
+        {
+          "name": "Shield",
+          "money": 392,
+          "desc": "Industrial Design",
+          "transfer": [
+            {
+              "date": "2018/10/26 上午1:34:26",
+              "member": "==Cash==",
+              "money": "392",
+              "desc": "==Deposit=="
+            }
+          ],
+          "id": 7
+        },
+        {
+          "name": "Lauder",
+          "money": 0,
+          "desc": "Grils",
+          "transfer": [],
+          "id": 8
+        }
+      ],
+      "bank": {
+        "money": 0,
+        "transfer": []
       }
-    ],
-    "company": [
-      {
-        "name": "Trafigura",
-        "money": 1353,
-        "desc": "Trade",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:10:11",
-            "member": "==Cash==",
-            "money": "1353",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 1
-      },
-      {
-        "name": "Century",
-        "money": 256,
-        "desc": "Estate",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:10:28",
-            "member": "==Cash==",
-            "money": "256",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 2
-      },
-      {
-        "name": "GoldMan Sachs",
-        "money": 199,
-        "desc": "Financial",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:11:39",
-            "member": "==Cash==",
-            "money": "199",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 3
-      },
-      {
-        "name": "Xeon",
-        "money": 72,
-        "desc": "Manufacture",
-        "transfer": [
-          {
-            "date": "2018/10/25 上午3:30:54",
-            "member": "==Cash==",
-            "money": "72",
-            "desc": "==Deposit=="
-          }
-        ],
-        "id": 4
-      }
-    ],
-    "bank": { "money": 0, "transfer": [] }
+    }
   }
-}
