@@ -13,20 +13,24 @@
         </div>
         <div>
             <div class="left">
-                <div v-for="(row, index1) in left.data" class="row">
-                    <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
-                        <input v-if="isEdit('left', index1, index2)" v-model="value" @blur="blur" type="text"/>
-                        <div v-else class="content" @click="edit('left', index1, index2)" @dragover.prevent @drop="drop('left', index1, index2, $event)">{{item}}</div>
+                <div class="flexWrapper">
+                    <div v-for="(row, index1) in left.data" class="row">
+                        <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
+                            <input v-if="isEdit('left', index1, index2)" v-model="value" @blur="blur" type="text"/>
+                            <div v-else class="content" @click="edit('left', index1, index2)" @dragover.prevent @drop="drop('left', index1, index2, $event)">{{item}}</div>
+                        </div>
                     </div>
                 </div>     
             </div>
             <div class="right">
-                <div v-for="(row, index1) in right.data" class="row">
-                    <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
-                        <input v-if="isEdit('right', index1, index2)" v-model="value" @blur="blur" type="text"/>
-                        <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)">{{item}}</div>
-                    </div>
-                </div>    
+                <div class="flexWrapper" style="flex-direction: row;">
+                    <div v-for="(row, index1) in right.data" class="row">
+                        <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
+                            <input v-if="isEdit('right', index1, index2)" v-model="value" @blur="blur" type="text"/>
+                            <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)">{{item}}</div>
+                        </div>
+                    </div>    
+                </div>
             </div>
         </div>
     </div>
@@ -132,9 +136,15 @@ export default {
     border: 1px solid blue;
     /* background: #66f; */
 }
+.flexWrapper{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
 .row {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
 }
 .item {
     float: left;
