@@ -39,7 +39,15 @@
                     <div v-for="(row, index1) in right.data" class="row">
                         <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
                             <input v-if="isEdit('right', index1, index2)" v-model="value" @blur="blur" type="text"/>
-                            <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)">{{item ? item.name : 'null'}}</div>
+                            <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)">
+                                <div v-if="!item">null</div>
+                                <div v-else>
+                                    <div>{{item.name}}</div>
+                                    <div>damage: {{item.damage}}</div>
+                                    <div>range: {{item.range}}</div>
+                                    <div>hp: {{item.hp}}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,13 +62,13 @@ export default {
             tools: [
                 {
                     name: 'plane',
-                    damage: 100,
+                    damage: 50,
                     range: 3,
                     hp: 500,
                 },
                 {
                     name: 'tank',
-                    damage: 100,
+                    damage: 50,
                     range: 2,
                     hp: 1000,
                 },
@@ -77,16 +85,18 @@ export default {
                 y: undefined,
             },
             left: {
-                x: 5,
-                y: 5,
+                x: 3,
+                y: 3,
                 data: [],
             },
             right: {
-                x: 5,
-                y: 5,
+                x: 3,
+                y: 3,
                 data: [],
             },
             value: '',
+            startType: '',
+            enemyType: '',
         }
     },
     created() {
@@ -100,22 +110,67 @@ export default {
     },
     methods: {
         start() {
-            const tempLeft = {
-                x: 0,
-                y: 0,
-                done: false,
+            const temp = {
+                left: {
+                    x: 0,
+                    y: 0,
+                    done: false,
+                },
+                right: {
+                    x: 0,
+                    y: 0,
+                    done: false,
+                },
             };
-            const tempRight = {
-                x: 0,
-                y: 0,
-                done: false,
-            };
-
+            this.startType = Math.random() > 0.5 ? 'left' : 'right';
+            this.enemyType = this.getEnemyType(this.startType);
+            this.recursion(temp);
+        },
+        recursion(temp) {
+            console.log(this.startType, this.enemyType);
+            console.log(temp[this.startType].x, temp[this.startType].y);
+            if(!this.isValidCoords(temp, this.startType) && !this.isValidCoords(temp, this.enemyType))
+                return;
+            if(this.isValidCoords(temp, this.startType)) {
+                this.fire(temp[this.startType], this[this.startType], this[this.enemyType]);
+                if(temp[this.startType].x === this[this.startType].x - 1) {
+                    temp[this.startType].y += 1;
+                    temp[this.startType].x = 0;
+                } else {
+                    temp[this.startType].x += 1;
+                }
+            }
+            this.startType = this.getEnemyType(this.startType);
+            this.enemyType = this.getEnemyType(this.startType);
+            
+            setTimeout(() => {
+                this.recursion(temp);
+            }, 1000)
+        },
+        isValidCoords(temp, type) {
+            return temp[type].x < this[type].x && temp[type].y < this[type].y;
+        },
+        getEnemyType(type) {
+            return type === 'left' ? 'right' : 'left';
         },
         fire(coords, self, enemy){
             const selfItem = this.getItem(self.data, coords.x, coords.y);
-            const random = getRamdom(enemy.x, enemy.y);
-            const enemyItem = this.getItem(enemy.data, random.x, random.y);
+            const random = this.getRamdom(enemy.x, enemy.y);
+            console.log(random);
+            const enemyItem = selfItem.range > 1 ? this.getRangeItems(enemy, enemy.data, random.x, random.y, selfItem.range) : this.getItem(enemy.data, random.x, random.y);
+            if(Array.isArray(enemyItem)) {
+                enemyItem.forEach(item => {
+                    this.damage(selfItem, item)
+                })
+            } else {
+                this.damage(selfItem, enemyItem)
+            }
+            this.$forceUpdate();
+        },
+        damage(self, enemy) {
+            if(!enemy || !self || enemy.hp <= 0|| self.hp <= 0)
+                return;
+            enemy.hp -= self.damage;
         },
         getItem(data, x, y) {
             return data[x][y];
@@ -131,11 +186,12 @@ export default {
                     }
                 }
             }
+            return result;
         },
         getRamdom(x, y) {
             const _x = Math.floor(Math.random()*x);
             const _y = Math.floor(Math.random()*y);
-            return [_x, _y];
+            return {x: _x, y: _y};
         },
         drop(type, x, y, ev){
             ev.preventDefault();
