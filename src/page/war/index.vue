@@ -6,7 +6,10 @@
         right:
         x:<input v-model="right.x" type="text"/>y:<input v-model="right.y" type="text"/>
         <button @click="save">save</button>
+        time: <input v-model="time" type="text"/>
         <button @click="start">start</button>
+        <pre>{{message}}</pre>
+        <p>finish: {{finish}}</p>
         <div class="toolWrapper">
             <div class="tool" v-for="(value, index) in tools" draggable="true" @dragstart="dragstart(value, $event)">
                 <div>{{value.name}}</div>
@@ -20,12 +23,18 @@
                 <div class="flexWrapper">
                     <div v-for="(row, index1) in left.data" class="row">
                         <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
-                            <input v-if="isEdit('left', index1, index2)" v-model="value" @blur="blur" type="text"/>
-                            <div v-else class="content" @click="edit('left', index1, index2)" @dragover.prevent @drop="drop('left', index1, index2, $event)">
+                            <!-- <input v-if="isEdit('left', index1, index2)" v-model="value" @blur="blur" type="text"/> -->
+                            <!-- <div v-else class="content" @click="edit('left', index1, index2)" @dragover.prevent @drop="drop('left', index1, index2, $event)"> -->
+                            <div class="content" :class="{ self: isSelfItem('left', index1, index2), enemy: isEnemyItem('left', index1, index2) }" @dragover.prevent @drop="drop('left', index1, index2, $event)">
                                 <div v-if="!item">null</div>
                                 <div v-else>
                                     <div>{{item.name}}</div>
-                                    <div>damage: {{item.damage}}</div>
+                                    <div style="color:#fff;" :style="{background: getBackground(item)}">
+                                        damage: {{item.damage}}
+                                        <div v-if="isEnemyItem('left', index1, index2)">
+                                            -{{selfItem.damage}}
+                                        </div>
+                                    </div>
                                     <div>range: {{item.range}}</div>
                                     <div>hp: {{item.hp}}</div>
                                 </div>
@@ -38,12 +47,18 @@
                 <div class="flexWrapper" style="flex-direction: row;">
                     <div v-for="(row, index1) in right.data" class="row">
                         <div class="item" v-if="Array.isArray(row)" v-for="(item, index2) in row">
-                            <input v-if="isEdit('right', index1, index2)" v-model="value" @blur="blur" type="text"/>
-                            <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)">
+                            <!-- <input v-if="isEdit('right', index1, index2)" v-model="value" @blur="blur" type="text"/>
+                            <div v-else class="content" @click="edit('right', index1, index2)" @dragover.prevent @drop="drop('right', index1, index2, $event)"> -->
+                            <div class="content" :class="{ self: isSelfItem('right', index1, index2), enemy: isEnemyItem('right', index1, index2) }" @dragover.prevent @drop="drop('right', index1, index2, $event)">
                                 <div v-if="!item">null</div>
                                 <div v-else>
                                     <div>{{item.name}}</div>
-                                    <div>damage: {{item.damage}}</div>
+                                    <div style="color:#fff;" :style="{background: getBackground(item)}">
+                                        damage: {{item.damage}}
+                                        <div v-if="isEnemyItem('right', index1, index2)">
+                                            -{{selfItem.damage}}
+                                        </div>
+                                    </div>
                                     <div>range: {{item.range}}</div>
                                     <div>hp: {{item.hp}}</div>
                                 </div>
@@ -65,18 +80,21 @@ export default {
                     damage: 50,
                     range: 3,
                     hp: 500,
+                    full: 500,
                 },
                 {
                     name: 'tank',
                     damage: 50,
                     range: 2,
                     hp: 1000,
+                    full: 1000,
                 },
                 {
                     name: 'soldier',
                     damage: 50,
                     range: 1,
                     hp: 100,
+                    full: 100,
                 }
             ],
             editData: {
@@ -94,11 +112,26 @@ export default {
                 y: 3,
                 data: [],
             },
+            selfItem: {},
+            selfCoords: {
+                x: 0,
+                y: 0,
+            },
+            enemyItem: {},
+            enemyCoords: {
+                x: 0,
+                y: 0,
+                range: 0,
+            },
             value: '',
             startType: '',
             enemyType: '',
+            time: 500,
+            message: '',
+            finish: false,
         }
     },
+    computed: {},
     created() {
         this.init();
         this.$watch(() => this.left.x+this.left.y, () => {
@@ -109,7 +142,18 @@ export default {
         });
     },
     methods: {
+        getBackground(item) {
+            const red = item.hp / item.full * 256;
+            return 'rgb('+red+',0,0)'
+        },
+        isSelfItem(type, y, x) {
+            return type === this.startType && x === this.selfCoords.x && y === this.selfCoords.y;
+        },
+        isEnemyItem(type, y, x) {
+            return type === this.enemyType && this.isInRange(x, y, this.enemyCoords.x, this.enemyCoords.y, this.enemyCoords.range - 1);
+        },
         start() {
+            this.finish = false;
             const temp = {
                 left: {
                     x: 0,
@@ -127,10 +171,12 @@ export default {
             this.recursion(temp);
         },
         recursion(temp) {
-            console.log(this.startType, this.enemyType);
-            console.log(temp[this.startType].x, temp[this.startType].y);
-            if(!this.isValidCoords(temp, this.startType) && !this.isValidCoords(temp, this.enemyType))
+            // console.log(this.startType, this.enemyType);
+            // console.log(temp[this.startType].x, temp[this.startType].y);
+            if(!this.isValidCoords(temp, this.startType) && !this.isValidCoords(temp, this.enemyType)) {
+                this.finish = true;
                 return;
+            }
             if(this.isValidCoords(temp, this.startType)) {
                 this.fire(temp[this.startType], this[this.startType], this[this.enemyType]);
                 if(temp[this.startType].x === this[this.startType].x - 1) {
@@ -140,30 +186,48 @@ export default {
                     temp[this.startType].x += 1;
                 }
             }
-            this.startType = this.getEnemyType(this.startType);
-            this.enemyType = this.getEnemyType(this.startType);
             
             setTimeout(() => {
+                this.startType = this.getEnemyType(this.startType);
+                this.enemyType = this.getEnemyType(this.startType);
                 this.recursion(temp);
-            }, 1000)
+            }, this.time)
         },
         isValidCoords(temp, type) {
-            return temp[type].x < this[type].x && temp[type].y < this[type].y;
+            const notDone = temp[type].x < this[type].x && temp[type].y < this[type].y;
+            temp.done = !notDone;
+            return notDone;
         },
         getEnemyType(type) {
             return type === 'left' ? 'right' : 'left';
         },
         fire(coords, self, enemy){
-            const selfItem = this.getItem(self.data, coords.x, coords.y);
+            this.selfCoords = {
+                x: coords.x,
+                y: coords.y,
+            };
+            this.selfItem = this.getItem(self.data, coords.x, coords.y);
             const random = this.getRamdom(enemy.x, enemy.y);
+            this.enemyCoords = {
+                x: random.x,
+                y: random.y,
+                range: this.selfItem.range,
+            };
             console.log(random);
-            const enemyItem = selfItem.range > 1 ? this.getRangeItems(enemy, enemy.data, random.x, random.y, selfItem.range) : this.getItem(enemy.data, random.x, random.y);
-            if(Array.isArray(enemyItem)) {
-                enemyItem.forEach(item => {
-                    this.damage(selfItem, item)
+            this.enemyItem = this.selfItem.range > 1 ? this.getRangeItems(enemy, enemy.data, random.x, random.y, this.selfItem.range) : this.getItem(enemy.data, random.x, random.y);
+            this.message = `
+                            ${this.startType} VS ${this.enemyType}
+                            name: ${this.selfItem.name || 'null'}
+                            start: ${coords.x}  ${coords.y}
+                            target: ${random.x}  ${random.y} 
+                            range: ${this.selfItem.range || 0}
+                            ` 
+            if(Array.isArray(this.enemyItem)) {
+                this.enemyItem.forEach(item => {
+                    this.damage(this.selfItem, item)
                 })
             } else {
-                this.damage(selfItem, enemyItem)
+                this.damage(this.selfItem, this.enemyItem)
             }
             this.$forceUpdate();
         },
@@ -173,20 +237,29 @@ export default {
             enemy.hp -= self.damage;
         },
         getItem(data, x, y) {
-            return data[x][y];
+            return data[y][x];
         },
         getRangeItems(item, data, x, y, range) {
             const offset = range - 1;
             const result = [];
             for(let i = 0; i < item.x; i++){
                 for(let j = 0; j < item.y; j++){
-                    if(i >= x - offset && i <= x + offset) {
-                        if(j >= y - offset && j <= y + offset)
-                            result.push(data[i][j]);
-                    }
+                    // if(i >= x - offset && i <= x + offset) {
+                    //     if(j >= y - offset && j <= y + offset)
+                    //         result.push(data[i][j]);
+                    // }
+                    if(this.isInRange(i, j, x, y, offset))
+                        result.push(data[j][i]);
                 }
             }
             return result;
+        },
+        isInRange(i, j, x, y, offset) {
+            if(i >= x - offset && i <= x + offset) {
+                if(j >= y - offset && j <= y + offset)
+                    return true;
+            }
+            return false;
         },
         getRamdom(x, y) {
             const _x = Math.floor(Math.random()*x);
@@ -281,6 +354,12 @@ export default {
 .content{
     padding: 30px;
     background: #faa;
+}
+.self{
+    background: #aaa;
+}
+.enemy{
+    background: #c95;
 }
 .tool{
     display: inline-block;
