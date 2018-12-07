@@ -6,9 +6,16 @@
         right:
         x:<input v-model="right.x" type="text"/>y:<input v-model="right.y" type="text"/>
         <button @click="save">save</button>
-        time: <input v-model="time" type="text"/>
-        <button @click="start">start</button>
-        <pre>{{message}}</pre>
+        <div>
+            time: <input v-model="time" type="text"/>
+            auto: 
+            <input type="radio" :value="true" v-model="auto"/>
+            <input type="radio" :value="false" v-model="auto"/>
+            {{auto}}
+            <button @click="start">start</button>
+            <button @click="next">next</button>
+        </div>
+        <p>{{message}}</p>
         <p>finish: {{finish}}</p>
         <div class="toolWrapper">
             <div class="tool" v-for="(value, index) in tools" draggable="true" @dragstart="dragstart(value, $event)">
@@ -129,6 +136,8 @@ export default {
             time: 500,
             message: '',
             finish: false,
+            temp: {},
+            auto: true,
         }
     },
     computed: {},
@@ -166,6 +175,7 @@ export default {
                     done: false,
                 },
             };
+            this.temp = temp;
             this.startType = Math.random() > 0.5 ? 'left' : 'right';
             this.enemyType = this.getEnemyType(this.startType);
             this.recursion(temp);
@@ -186,12 +196,16 @@ export default {
                     temp[this.startType].x += 1;
                 }
             }
-            
-            setTimeout(() => {
-                this.startType = this.getEnemyType(this.startType);
-                this.enemyType = this.getEnemyType(this.startType);
-                this.recursion(temp);
-            }, this.time)
+            if(this.auto) {
+                setTimeout(() => {
+                    this.next();
+                }, this.time)
+            }
+        },
+        next() {
+            this.startType = this.getEnemyType(this.startType);
+            this.enemyType = this.getEnemyType(this.startType);
+            this.recursion(this.temp);
         },
         isValidCoords(temp, type) {
             const notDone = temp[type].x < this[type].x && temp[type].y < this[type].y;
@@ -323,7 +337,7 @@ export default {
     float: left;
     width: 50%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid red;
     /* background: #f66; */
 }
@@ -331,7 +345,7 @@ export default {
     float: right;
     width: 50%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid blue;
     /* background: #66f; */
 }
@@ -352,7 +366,7 @@ export default {
     cursor: pointer;
 }
 .content{
-    padding: 30px;
+    padding: 20px;
     background: #faa;
 }
 .self{
@@ -365,11 +379,11 @@ export default {
     display: inline-block;
     background: #aff;
     width: 80px;
-    padding: 10px;
-    margin: 10px;
+    padding: 5px;
+    margin: 5px;
 }
 .toolWrapper{
-    margin: 10px;
+    margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #333;
 }
