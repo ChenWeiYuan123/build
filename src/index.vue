@@ -5,6 +5,7 @@
             <router-link to="/bank">Bank</router-link>
             <router-link to="/account?type=person">Person</router-link>
             <router-link to="/account?type=company">Company</router-link>
+            <router-link to="/bid">bid</router-link>
             <router-link to="/war">War</router-link>
             <router-link to="/select">Select</router-link>
             <router-link to="/storage">Storage</router-link>

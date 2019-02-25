@@ -1,0 +1,120 @@
+{
+    "account": {
+      "person": [],
+      "company": [
+        {
+          "name": "Government",
+          "money": 1950,
+          "desc": "政府",
+          "transfer": [
+            {
+              "date": "2018/12/17 上午2:58:44",
+              "member": "==Cash==",
+              "money": "3000",
+              "desc": "==Deposit=="
+            },
+            {
+              "member": "Estate",
+              "money": "-200",
+              "desc": "市政大楼",
+              "date": "2018/12/17 上午3:03:23"
+            },
+            {
+              "member": "Arms",
+              "money": "-600",
+              "desc": "装备",
+              "date": "2018/12/17 上午3:07:46"
+            },
+            {
+              "member": "Military",
+              "money": "-250",
+              "desc": "军队管理费用 5/p",
+              "date": "2018/12/17 上午3:11:26"
+            }
+          ],
+          "id": 1
+        },
+        {
+          "name": "Estate",
+          "money": 200,
+          "desc": "地产",
+          "transfer": [
+            {
+              "member": "Government",
+              "money": "200",
+              "desc": "市政大楼",
+              "date": "2018/12/17 上午3:03:23"
+            }
+          ],
+          "id": 2
+        },
+        {
+          "name": "Arms",
+          "money": 600,
+          "desc": "军火",
+          "transfer": [
+            {
+              "member": "Government",
+              "money": "600",
+              "desc": "装备",
+              "date": "2018/12/17 上午3:07:46"
+            }
+          ],
+          "id": 3
+        },
+        {
+          "name": "Military",
+          "money": 250,
+          "desc": "\b军队后勤部",
+          "transfer": [
+            {
+              "member": "Government",
+              "money": "250",
+              "desc": "军队管理费用 5/p",
+              "date": "2018/12/17 上午3:11:26"
+            }
+          ],
+          "id": 4
+        },
+        {
+          "name": "Nurse",
+          "money": 0,
+          "desc": "护理 5/次",
+          "transfer": [],
+          "id": 5
+        },
+        {
+          "name": "Casino",
+          "money": 0,
+          "desc": "娱乐 girls：10/次",
+          "transfer": [],
+          "id": 6
+        },
+        {
+          "name": "Food",
+          "money": 0,
+          "desc": "食品 5/人/月",
+          "transfer": [],
+          "id": 7
+        },
+        {
+          "name": "Energe",
+          "money": 0,
+          "desc": "能源",
+          "transfer": [],
+          "id": 8
+        },
+        {
+          "name": "Industry",
+          "money": 0,
+          "desc": "工业生产",
+          "transfer": [],
+          "id": 9
+        }
+      ],
+      "bank": {
+        "money": 0,
+        "transfer": []
+      }
+    }
+  }
